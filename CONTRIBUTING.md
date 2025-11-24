@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Rust
+- [Rust](https://rust-lang.org/)
 - Cargo
 
 ## Build
