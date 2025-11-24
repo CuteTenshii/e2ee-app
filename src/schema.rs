@@ -4,7 +4,7 @@ diesel::table! {
     devices (id) {
         id -> Uuid,
         user_id -> Nullable<Uuid>,
-        name -> Nullable<Text>,
+        name -> Text,
         created_at -> Nullable<Timestamptz>,
         last_seen -> Nullable<Timestamptz>,
         is_revoked -> Nullable<Bool>,

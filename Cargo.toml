@@ -14,3 +14,8 @@ chrono = { version = "0.4", features = ["serde"] }
 serde = { version = "1.0.228", features = ["derive"] }
 tracing-subscriber = { version = "0.3", features = ["fmt", "env-filter"] }
 tower-http = { version = "0.6.6", features = ["trace"] }
+rand = "0.10.0-rc.5"
+argon2 = "0.6.0-rc.2"
+password-hash = { version = "0.6.0-rc.2", features = ["getrandom"] }
+jsonwebtoken = { version = "10", features = ["aws_lc_rs"] }
+base64 = "0.22.1"

@@ -1,16 +1,16 @@
 use diesel::prelude::*;
-use chrono::NaiveDateTime;
+use chrono::{DateTime, NaiveDateTime, Utc};
 use uuid::Uuid;
 use serde::Serialize;
 use crate::schema::{devices, messages, one_time_prekeys, users, verification_codes};
 
-#[derive(Debug, Queryable, Identifiable, Associations)]
+#[derive(Debug, Queryable, Identifiable, Associations, Serialize)]
 #[diesel(table_name = devices)]
 #[diesel(belongs_to(User))]
 pub struct Device {
     pub id: Uuid,
     pub user_id: Option<Uuid>,
-    pub name: Option<String>,
+    pub name: String,
     pub created_at: Option<NaiveDateTime>,
     pub last_seen: Option<NaiveDateTime>,
     pub is_revoked: Option<bool>,
@@ -95,6 +95,7 @@ pub struct NewUser<'a> {
     pub name: &'a str,
     pub phone_number: &'a str,
     pub avatar_hash: Option<&'a str>,
+    pub created_at: Option<NaiveDateTime>,
 }
 
 #[derive(Debug, Queryable, Identifiable)]
@@ -103,7 +104,7 @@ pub struct NewUser<'a> {
 pub struct VerificationCode {
     pub phone_number: String,
     pub code_hash: String,
-    pub expires_at: NaiveDateTime,
+    pub expires_at: DateTime<Utc>,
     pub attempt_count: Option<i32>,
 }
 
