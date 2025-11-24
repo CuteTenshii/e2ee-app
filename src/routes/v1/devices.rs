@@ -1,11 +1,11 @@
-use crate::{AppState, AuthUserDevice};
+use crate::{AppState, AuthUser};
 use axum::{Extension, Json};
 use diesel::prelude::*;
 use e2ee_back::schema::devices;
 use serde_json::{json, Value};
 use uuid::Uuid;
 
-pub async fn get_devices(state: Extension<AppState>, auth: AuthUserDevice) -> Json<Value> {
+pub async fn get_devices(state: Extension<AppState>, auth: AuthUser) -> Json<Value> {
     let mut conn = state.db.get().unwrap();
     let results = devices::table
         .select((

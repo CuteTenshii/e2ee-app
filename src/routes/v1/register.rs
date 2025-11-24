@@ -173,7 +173,6 @@ pub async fn register_confirm(state: Extension<AppState>, Json(payload): Json<Co
         .verify_password(payload.otp.as_bytes(), &parsed)
         .is_err() {
         diesel::update(verification_codes::table.filter(verification_codes::phone_number.eq(&phone)))
-            // Incrémenter tentatives
             .set(verification_codes::attempt_count.eq(attempts + 1))
             .execute(&mut conn)
             .unwrap();

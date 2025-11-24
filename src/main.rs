@@ -64,12 +64,7 @@ pub struct AuthUser {
     pub device_id: Uuid,
 }
 
-pub struct AuthUserDevice {
-    pub user_id: Uuid,
-    pub device_id: Uuid,
-}
-
-impl<S> FromRequestParts<S> for AuthUserDevice
+impl<S> FromRequestParts<S> for AuthUser
 where
     S: Send + Sync,
 {
@@ -98,7 +93,7 @@ where
         )
             .map_err(|_| (StatusCode::UNAUTHORIZED, "Unauthorized".into()))?;
 
-        Ok(AuthUserDevice {
+        Ok(AuthUser {
             user_id: decoded.claims.sub,
             device_id: decoded.claims.device,
         })

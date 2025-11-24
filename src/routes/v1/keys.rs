@@ -1,5 +1,5 @@
 use crate::routes::v1::register::Claims;
-use crate::{AppState, AuthUserDevice};
+use crate::{AppState, AuthUser};
 use axum::http::StatusCode;
 use axum::{Extension, Json};
 use base64::Engine;
@@ -23,7 +23,7 @@ pub struct UploadKeysRequest {
 
 pub async fn upload_keys(
     Extension(state): Extension<AppState>,
-    auth: AuthUserDevice,
+    auth: AuthUser,
     Json(payload): Json<UploadKeysRequest>,
 ) -> (StatusCode, Json<serde_json::Value>) {
     let mut conn = state.db.get().unwrap();
